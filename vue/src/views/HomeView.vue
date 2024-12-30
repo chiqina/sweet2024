@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
   <div>
     <el-container>
       <el-aside :width="asideWidth" style="min-height: 100vh; background-color:#001529;">
@@ -40,10 +40,48 @@
         <el-header>
           <div style="display: flex; align-items: center; height: 100%;">
             <i :class="collapseIcon" style="font-size: 26px;" @click="handleCollapse"></i>
-            <span>头部区域</span>
+           <el-breadcrumb :separator-icon="ArrowRight">
+             <el-breadcrumb-item :to="{ path: '/' }" style="margin-left: 20px">首页</el-breadcrumb-item>
+             <el-breadcrumb-item :to="{ path: '/user' }">用户管理</el-breadcrumb-item>
+           </el-breadcrumb>
+          </div>
+          <div style="flex:1;width:0;display: flex; align-items: center; justify-content: flex-end;">
+              <i class="el-icon-quanping" style="font-size: 26px" @click="headleFull"></i>
+              <el-dropdown placement="bottom">
+                 <div style="display: flex; align-items: center; cursor: default;">
+                   <img src="@/assets/img/logo.jpg" alt="" style="width: 40px; height: 40px;border-radius: 50%; margin:0 5px">
+                   <span>管理员</span>
+                 </div>
+                  <el-dropdown-menu>
+                  <el-dropdown-item>个人信息</el-dropdown-item>
+                  <el-dropdown-item>修改密码</el-dropdown-item>
+                  <el-dropdown-item>退出登入</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
           </div>
         </el-header>
-        <el-main>主体部分</el-main>
+        <el-main>
+          <div style="box-shadow: 0 0 10px rgba(0,0,0,.1);padding: 10px 20px;border-radius: 5px; margin-bottom: 10px">
+            早安，骚年，祝你开心每一天
+          </div>
+          <el-card style="width: 500px">
+            <div slot="header" class="clearfix">
+              <span>朱哥哥带你做毕设2024</span>
+            </div>
+            <div>
+                2024毕业社开始了！朱哥哥带你手把手敲出来
+               <div style="margin-top: 20px">
+                 <div style="margin: 20px 0"><strong>主题色</strong></div>
+                <el-button disabled>按钮</el-button>
+                <el-button type="primary" disabled>按钮</el-button>
+                <el-button type="success" disabled>按钮</el-button>
+                <el-button type="info" disabled>按钮</el-button>
+                <el-button type="warning" disabled>按钮</el-button>
+                <el-button type="danger" disabled>按钮</el-button>
+              </div>
+            </div>
+          </el-card>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -66,6 +104,9 @@ export default {
       this.isCollapse = !this.isCollapse;
       this.asideWidth = this.isCollapse ? '64px' : '200px';
       this.collapseIcon = this.isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold';
+    },
+    headleFull(){
+       document.documentElement.requestFullscreen()
     }
   }
 }
@@ -127,6 +168,7 @@ export default {
 }
 
 .el-header {
+  display: flex;
   box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
 }
 </style>
