@@ -19,15 +19,15 @@ public class WebController {
     }
 
     @PostMapping("/login")
-    public Result login(@RequestParam String username, @RequestParam String password) {
-        if(StrUtil.isBlank(username) || StrUtil.isBlank(password)) {
+    public Result login(@RequestBody User user) {
+        if(StrUtil.isBlank(user.getUsername()) || StrUtil.isBlank(user.getPassword())) {
             return Result.error("用户名或密码错误");
         }
 
-        User user = userService.login(username, password);
+        User userinfo = userService.login(user.getUsername(), user.getPassword());
 
         // 登陆逻辑
-        return Result.success(user);
+        return Result.success(userinfo);
     }
 
 }
