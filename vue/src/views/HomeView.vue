@@ -8,7 +8,7 @@
             <span style="margin-left:5px;font-size: 20px; line-height: 40px;" v-show="!isCollapse">honey2024</span>
           </transition>
         </div>
-        <el-menu router :collapse="isCollapse" collapse-transition=false style="border:none;" background-color="#001529"
+        <el-menu router :collapse="isCollapse"  style="border:none;" background-color="#001529"
           text-color="rgba(255,255,255,0.65)" active-text-color="#fff" :default-active="$route.path">
           <el-menu-item index="/">
             <template>
@@ -40,7 +40,7 @@
         <el-header>
           <div style="display: flex; align-items: center; height: 100%;">
             <i :class="collapseIcon" style="font-size: 26px;" @click="handleCollapse"></i>
-           <el-breadcrumb :separator-icon="ArrowRight">
+           <el-breadcrumb>
              <el-breadcrumb-item :to="{ path: '/' }" style="margin-left: 20px">首页</el-breadcrumb-item>
              <el-breadcrumb-item :to="{ path: '/user' }">用户管理</el-breadcrumb-item>
            </el-breadcrumb>
@@ -64,7 +64,8 @@
           <div style="box-shadow: 0 0 10px rgba(0,0,0,.1);padding: 10px 20px;border-radius: 5px; margin-bottom: 10px">
             早安，骚年，祝你开心每一天
           </div>
-          <el-card style="width: 500px">
+          <div style="display: flex;">
+            <el-card style="width: 50%;margin-right: 10px">
             <div slot="header" class="clearfix">
               <span>朱哥哥带你做毕设2024</span>
             </div>
@@ -81,6 +82,20 @@
               </div>
             </div>
           </el-card>
+            <el-card  style="width: 50%;">
+             <div slot="header" class="clearfix">
+              <span>渲染数据</span>
+            </div>
+            <div>
+              <el-table :data="users">
+                <el-table-column label="ID" prop="id"  />
+                 <el-table-column label="用户名" prop="username" />
+                 <el-table-column label="姓名" prop="name" />
+                 <el-table-column label="地址"  prop="address" />
+              </el-table>
+            </div>
+          </el-card>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -90,14 +105,24 @@
 <script>
 // @ is an alias to /src
 
+
+
+import request from "@/utils/request.js";
+
 export default {
   name: 'HomeView',
   data() {
     return {
       isCollapse: false,
       asideWidth: '200px',
-      collapseIcon: 'el-icon-s-fold'
+      collapseIcon: 'el-icon-s-fold',
+      users:[],
     }
+  },
+  mounted(){
+    request.get('/user/selectAll').then(res => {
+      this.users = res.data;
+    })
   },
   methods: {
     handleCollapse() {
