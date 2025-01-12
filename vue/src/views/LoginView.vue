@@ -22,7 +22,7 @@
                   {{ city }}
                 </el-checkbox>
               </el-checkbox-group>
-                <el-button class="logins" @click="login">登录</el-button>
+                <el-button class="logins" @click="login">登 录</el-button>
                 <p class="other">其他登录方式</p>
                 <el-button class="wx-logo">
                   <i class="el-icon-weixin"></i>

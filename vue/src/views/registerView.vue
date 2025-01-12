@@ -59,7 +59,7 @@ export default {
       this.$request.post("/register",this.users).then(res=>{
         if(res.code == 200){
           this.$message.success("注册成功")
-          this.$router.push("/login") 
+          this.$router.push("/login")
         }else{
           this.$message.error(res.msg)
         }
