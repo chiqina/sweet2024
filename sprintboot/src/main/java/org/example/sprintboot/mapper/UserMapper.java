@@ -34,4 +34,8 @@ public interface UserMapper {
 
     @Select("Select * FROM `user` where username = #{username} and password = #{password} LIMIT 1")
     User findByUsernameAndPassword(@Param("username") String username,@Param("password") String password);
+
+    //通过用户名查询用户数据信息
+    @Select("select username from `user` where username=#{username}")
+    User getUserName(@Param("username") String username);
 }

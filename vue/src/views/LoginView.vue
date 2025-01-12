@@ -8,12 +8,12 @@
               </div>
             </div>
             <div class="login-right">
-              <p class="register"><a href="#">注册</a> | <a href="#">忘记密码</a></p>
+              <p class="register"><a href="#" @click="$router.push('/register')">注册</a> | <a href="#">忘记密码</a></p>
               <a href=""></a>
               <h4 class="title name">CRM 登录：岁满168</h4>
               <div class="form-data">
-                <el-input v-model="username"  class="input-info" placeholder="用户名" />
-                <el-input v-model="password"  class="input-info" placeholder="密码" />
+                <el-input v-model="username"  class="input-info" placeholder="请输入用户名" />
+                <el-input v-model="password"  type="password" class="input-info" placeholder="请输入密码" />
                 <el-checkbox-group
                 v-model="checkedCities"
                 class="options"
@@ -50,9 +50,19 @@ export default {
   },
   methods: {
     login() {
+      if(this.username == "" || this.password == ""){
+        this.$message.error("用户名或密码不能为空")
+        return
+      }
       // 后台验证
       this.$request.post("/login",{"username":this.username,"password":this.password}).then(res=>{
-        console.log(res)
+        if(res.code == 200){
+          this.$message.success("登录成功")
+          localStorage.setItem ('honey-user',res.data) //保存数据到前段
+          this.$router.push("/")
+        }else{
+          this.$message.error(res.msg)
+        }
       })
     }
   }
@@ -210,7 +220,7 @@ export default {
   right: 10px;
 }
 .register>a{
-  color: #9da9bb;
+  color: green;
   font-size: 12px;
 }
 </style>

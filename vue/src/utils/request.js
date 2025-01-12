@@ -13,17 +13,17 @@ request.interceptors.request.use(config => {
     return Promise.reject(error)
 })
 
-request.interceptors.response.use(response => {
+request.interceptors.response.use(
+    response => {
         let res = response.data
         if (typeof res === 'string'){
             res = res ?JSON.parse(res) :res
         }
         return res
     },
-        error => {
-        console.log('response error:', error)
+    error => {
         return Promise.reject(error)
-})
+    })
 
 export default request
 

@@ -21,13 +21,23 @@ public class WebController {
     @PostMapping("/login")
     public Result login(@RequestBody User user) {
         if(StrUtil.isBlank(user.getUsername()) || StrUtil.isBlank(user.getPassword())) {
-            return Result.error("用户名或密码错误");
+            return Result.error("参数错误，请重新输入");
         }
 
         User userinfo = userService.login(user.getUsername(), user.getPassword());
 
         // 登陆逻辑
         return Result.success(userinfo);
+    }
+
+    @PostMapping("/register")
+    public Result register(@RequestBody User user) {
+        if(StrUtil.isBlank(user.getUsername()) || StrUtil.isBlank(user.getPassword())) {
+            return Result.error("参数错误，请重新输入");
+        }
+
+        User  resoult = userService.register(user);
+        return Result.success(resoult);
     }
 
 }
