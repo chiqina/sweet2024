@@ -3,6 +3,7 @@ package org.example.sprintboot.service;
 import org.example.sprintboot.entity.User;
 import org.example.sprintboot.exception.ServiceException;
 import org.example.sprintboot.mapper.UserMapper;
+import org.example.sprintboot.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +58,9 @@ public class UserService {
         if(!user.getPassword().equals(username) && !user.getUsername().equals(username)){
             throw new ServiceException("用户名或密码错误");
         }
+        //登入成功后生成一个token
+        String token = TokenUtils.createToken(user.getId().toString(), user.getPassword());
+        user.setToken(token);
         return user;
     }
 

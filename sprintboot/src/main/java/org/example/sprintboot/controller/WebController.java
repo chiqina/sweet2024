@@ -1,6 +1,7 @@
 package org.example.sprintboot.controller;
 
 import cn.hutool.core.util.StrUtil;
+import org.example.sprintboot.common.AuthAccess;
 import org.example.sprintboot.common.Result;
 import org.example.sprintboot.entity.User;
 import org.example.sprintboot.service.UserService;
@@ -19,6 +20,7 @@ public class WebController {
     }
 
     @PostMapping("/login")
+    @AuthAccess
     public Result login(@RequestBody User user) {
         if(StrUtil.isBlank(user.getUsername()) || StrUtil.isBlank(user.getPassword())) {
             return Result.error("参数错误，请重新输入");
@@ -31,6 +33,7 @@ public class WebController {
     }
 
     @PostMapping("/register")
+    @AuthAccess
     public Result register(@RequestBody User user) {
         if(StrUtil.isBlank(user.getUsername()) || StrUtil.isBlank(user.getPassword())) {
             return Result.error("参数错误，请重新输入");

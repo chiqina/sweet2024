@@ -58,7 +58,7 @@ export default {
       this.$request.post("/login",{"username":this.username,"password":this.password}).then(res=>{
         if(res.code == 200){
           this.$message.success("登录成功")
-          localStorage.setItem ('honey-user',res.data) //保存数据到前段
+          localStorage.setItem ('honey-user',JSON.stringify(res.data)) //保存数据到前段
           this.$router.push("/")
         }else{
           this.$message.error(res.msg)

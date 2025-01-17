@@ -38,4 +38,8 @@ public interface UserMapper {
     //通过用户名查询用户数据信息
     @Select("select username from `user` where username=#{username}")
     User getUserName(@Param("username") String username);
+
+    //通过用户ID查询数据
+    @Select("select * from `user` where id=#{id} limit 1")
+    User selectById(@Param("id") Integer id);
 }
