@@ -9,3 +9,6 @@ CREATE TABLE `user` (
     `avatar` varchar(255) COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '头像',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户表';
+
+-- 新增权限字段
+Alter table `user` add `role` varchar(255) collate utf8mb4_0900_ai_ci default null comment '角色';

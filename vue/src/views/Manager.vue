@@ -16,7 +16,7 @@
               <span slot="title">系统首页</span>
             </template>
           </el-menu-item>
-          <el-submenu index="1">
+          <el-submenu index="info" v-if="user.role === '管理员'">
             <template slot="title">
               <i class="el-icon-menu"></i>
               <span>信息管理</span>
@@ -30,19 +30,20 @@
           <div style="display: flex; align-items: center; height: 100%;">
             <i :class="collapseIcon" style="font-size: 26px;" @click="handleCollapse"></i>
            <el-breadcrumb>
-             <el-breadcrumb-item :to="{ path: '/' }" style="margin-left: 20px">首页</el-breadcrumb-item>
-             <el-breadcrumb-item :to="{ path: '/user' }">用户管理</el-breadcrumb-item>
+             <el-breadcrumb-item :to="{ path: '/' }" style="margin-left: 20px">主页</el-breadcrumb-item>
+             <el-breadcrumb-item :to="{ path: $route.path }">{{$route.meta.name}}</el-breadcrumb-item>
            </el-breadcrumb>
           </div>
           <div style="flex:1;width:0;display: flex; align-items: center; justify-content: flex-end;">
               <i class="el-icon-quanping" style="font-size: 26px" @click="headleFull"></i>
               <el-dropdown placement="bottom">
                  <div style="display: flex; align-items: center; cursor: default;">
-                   <img src="@/assets/img/logo.jpg" alt="" style="width: 40px; height: 40px;border-radius: 50%; margin:0 5px">
-                   <span>管理员</span>
+                   <img :src="user.avatar" alt="" style="width: 40px; height: 40px;border-radius: 50%; margin:0 5px" v-if="user.avatar">
+                   <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" style="width: 40px; height: 40px;border-radius: 50%; margin:0 5px" alt="" v-else>
+                   <span>{{user.name}}</span>
                  </div>
                   <el-dropdown-menu>
-                  <el-dropdown-item>个人信息</el-dropdown-item>
+                  <el-dropdown-item @click.native="$router.push('/personal')">个人信息</el-dropdown-item>
                   <el-dropdown-item>修改密码</el-dropdown-item>
                   <el-dropdown-item @click.native="logout">退出入</el-dropdown-item>
                 </el-dropdown-menu>
@@ -50,7 +51,7 @@
           </div>
         </el-header>
         <el-main>
-          <router-view />
+          <router-view @update:user="updateUser" />
         </el-main>
       </el-container>
     </el-container>
@@ -71,15 +72,16 @@ export default {
       isCollapse: false,
       asideWidth: '200px',
       collapseIcon: 'el-icon-s-fold',
-      users:[],
+      user:JSON.parse(localStorage.getItem('honey-user') ||'{}'),
     }
   },
   mounted(){
-    // request.get('/user/selectAll').then(res => {
-    //   this.users = res.data;
-    // })
   },
   methods: {
+    //接收子组件推送过来的数据并赋值给user
+    updateUser(user){
+      this.user = user;
+    },
     logout(){
       localStorage.removeItem('honey-user');
       this.$router.push('/login');

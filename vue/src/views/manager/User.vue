@@ -1,7 +1,7 @@
 <template>
   <div>
     <template>
-      <el-table :data="userInfo" style="width: 100%">
+      <el-table :data="user" style="width: 100%">
         <el-table-column prop="id" label="序号" width="180"/>
         <el-table-column prop="username" label="用户名" width="180"/>
         <el-table-column prop="name" label="姓名"/>
@@ -16,17 +16,20 @@
 
 <script>
 export default {
-  name: "",
-  data: {
-    return: {
-      user: {}
+  name: "user",
+  data(){
+    return{
+      user: []
     }
+  },
+  created(){
+   this.userInfo();  // 获取用户数据方法在created��子函数中调用，保证数据请求在组件��载前就发出去了。
   },
   methods: {
     userInfo() {
-      this.$request.get("/selectAll").then(res => {
-        this.user = res.data;
-      })
+       this.$request.get("/user/selectAll").then(res => {
+         this.user = res.data;
+       })
     }
   }
 }

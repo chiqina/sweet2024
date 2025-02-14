@@ -28,7 +28,7 @@ public class FileController {
         //获取.前面的名称
         String mainName = FileUtil.mainName(originalFilename);
         //获取后缀名称
-        String extName = FileUtil.extName("文件后缀");
+        String extName = FileUtil.extName(originalFilename);
         //获取当前路径
         String projectPath = System.getProperty("user.dir");
         //完整的文件路径
