@@ -44,7 +44,7 @@
                  </div>
                   <el-dropdown-menu>
                   <el-dropdown-item @click.native="$router.push('/personal')">个人信息</el-dropdown-item>
-                  <el-dropdown-item>修改密码</el-dropdown-item>
+                  <el-dropdown-item @click.native="$router.push('/Password')">修改密码</el-dropdown-item>
                   <el-dropdown-item @click.native="logout">退出入</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>

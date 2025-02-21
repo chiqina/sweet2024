@@ -22,6 +22,7 @@ const routes = [
       {path:'home', name:'Home',meta:{name:'系统首页'}, component:()=>import('../views/manager/Home')},
       {path:'user',name:'User',meta:{name:'用户信息'},component:()=>import('../views/manager/User')},
       {path:'personal',name:'Personal',meta:{name:'个人信息'},component:()=>import('../views/manager/Personal')},
+      {path:'password',name:'Password',meta:{name:'修改密码'},component:()=>import('../views/manager/Password')}
     ]
   },{
     path: '/login',

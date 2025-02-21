@@ -8,7 +8,7 @@
               </div>
             </div>
             <div class="login-right">
-              <p class="register"><a href="#" @click="$router.push('/register')">注册</a> | <a href="#">忘记密码</a></p>
+              <p class="register"><a href="#" @click="$router.push('/register')">注册</a> | <a @click="forgetPassword" href="#">忘记密码</a></p>
               <a href=""></a>
               <h4 class="title name">CRM 登录：岁满168</h4>
               <div class="form-data">
@@ -64,6 +64,9 @@ export default {
           this.$message.error(res.msg)
         }
       })
+    },
+    forgetPassword(){
+
     }
   }
 }
