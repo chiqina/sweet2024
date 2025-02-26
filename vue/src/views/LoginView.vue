@@ -31,6 +31,24 @@
               </div>
             </div>
         </div>
+
+
+    <el-dialog title="忘记密码" :visible.sync="dialogFormVisible">
+      <el-form :model="user">
+        <el-form-item label="用户名">
+          <el-input v-model="user.name" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item label="手机号">
+          <el-input v-model="user.phone" autocomplete="off"/>
+        </el-form-item>
+      </el-form>
+      <div class="dialog-footer">
+        <el-button @click="cancel">取消</el-button>
+        <el-button type="primary" @click="resetPassword">
+          重置密码
+        </el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -42,10 +60,12 @@ export default {
   name: "Login",
   data() {
     return {
+      user:{},
       username: "",
       password: "",
       checkedCities:['保存用户信息'],
-      cities:['保存用户信息','登录后先测速']
+      cities:['保存用户信息','登录后先测速'],
+      dialogFormVisible:false,
     };
   },
   methods: {
@@ -66,7 +86,17 @@ export default {
       })
     },
     forgetPassword(){
-
+      this.dialogFormVisible = true;
+      this.user = {} // 重置
+    },
+    handleClose(){
+      this.dialogFormVisible = false;
+    },
+    resetPassword(){
+      this.dialogFormVisible = false;
+    },
+    cancel(){
+      this.dialogFormVisible = false;
     }
   }
 }
